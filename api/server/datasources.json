@@ -1,0 +1,9 @@
+{
+  "local mongoDB": {
+    "host": "localhost",
+    "port": 27017,
+    "url": "",
+    "name": "local mongoDB",
+    "connector": "mongodb"
+  }
+}

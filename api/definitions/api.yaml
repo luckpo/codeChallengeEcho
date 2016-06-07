@@ -1,0 +1,325 @@
+paths:
+  /medications:
+    post:
+      tags:
+        - medication
+      summary: Create a new instance of the model and persist it into the data source.
+      operationId: medication.create
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            $ref: '#/definitions/medication'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/medication'
+      deprecated: false
+    put:
+      tags:
+        - medication
+      summary: Update an existing model instance or insert a new one into the data source.
+      operationId: medication.upsert
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            $ref: '#/definitions/medication'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/medication'
+      deprecated: false
+    get:
+      tags:
+        - medication
+      summary: Find all instances of the model matched by filter from the data source.
+      operationId: medication.find
+      parameters:
+        - name: filter
+          in: query
+          description: 'Filter defining fields, where, include, order, offset, and limit'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/medication'
+      deprecated: false
+  '/medications/{id}/exists':
+    get:
+      tags:
+        - medication
+      summary: Check whether a model instance exists in the data source.
+      operationId: 'medication.exists__get_medications_{id}_exists'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              exists:
+                type: boolean
+      deprecated: false
+  '/medications/{id}':
+    head:
+      tags:
+        - medication
+      summary: Check whether a model instance exists in the data source.
+      operationId: 'medication.exists__head_medications_{id}'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              exists:
+                type: boolean
+      deprecated: false
+    get:
+      tags:
+        - medication
+      summary: Find a model instance by id from the data source.
+      operationId: medication.findById
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: filter
+          in: query
+          description: Filter defining fields and include
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/medication'
+      deprecated: false
+    delete:
+      tags:
+        - medication
+      summary: Delete a model instance by id from the data source.
+      operationId: medication.deleteById
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+    put:
+      tags:
+        - medication
+      summary: Update attributes for a model instance and persist it into the data source.
+      operationId: medication.prototype.updateAttributes
+      parameters:
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            $ref: '#/definitions/medication'
+        - name: id
+          in: path
+          description: PersistedModel id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/medication'
+      deprecated: false
+  /medications/findOne:
+    get:
+      tags:
+        - medication
+      summary: Find first instance of the model matched by filter from the data source.
+      operationId: medication.findOne
+      parameters:
+        - name: filter
+          in: query
+          description: 'Filter defining fields, where, include, order, offset, and limit'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/medication'
+      deprecated: false
+  /medications/update:
+    post:
+      tags:
+        - medication
+      summary: Update instances of the model matched by where from the data source.
+      operationId: medication.updateAll
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            $ref: '#/definitions/medication'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            description: The number of instances updated
+            type: object
+      deprecated: false
+  /medications/count:
+    get:
+      tags:
+        - medication
+      summary: Count instances of the model matched by where from the data source.
+      operationId: medication.count
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              count:
+                type: number
+                format: double
+      deprecated: false
+  /medications/change-stream:
+    post:
+      tags:
+        - medication
+      summary: Create a change stream.
+      operationId: medication.createChangeStream__post_medications_change-stream
+      parameters:
+        - name: options
+          in: formData
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: file
+      deprecated: false
+    get:
+      tags:
+        - medication
+      summary: Create a change stream.
+      operationId: medication.createChangeStream__get_medications_change-stream
+      parameters:
+        - name: options
+          in: query
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: file
+      deprecated: false
+definitions:
+  medication:
+    properties:
+      description:
+        type: string
+      name:
+        description: Name of the medication
+        type: string
+    required:
+      - name
+    additionalProperties: false
+  x-any:
+    properties: {}
+swagger: '2.0'
+info:
+  x-ibm-name: api
+  version: 1.0.0
+  title: api
+schemes:
+  - https
+host: $(catalog.host)
+basePath: /api
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  clientIdHeader:
+    type: apiKey
+    in: header
+    name: X-IBM-Client-Id
+  clientSecretHeader:
+    in: header
+    name: X-IBM-Client-Secret
+    type: apiKey
+security:
+  - clientIdHeader: []
+    clientSecretHeader: []
+x-ibm-configuration:
+  testable: true
+  enforced: true
+  cors:
+    enabled: true
+  catalogs:
+    apic-dev:
+      properties:
+        runtime-url: $(TARGET_URL)
+    sb:
+      properties:
+        runtime-url: 'http://localhost:4001'
+  assembly:
+    execute:
+      - invoke:
+          target-url: $(runtime-url)$(request.path)$(request.search)
