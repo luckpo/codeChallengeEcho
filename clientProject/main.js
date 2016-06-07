@@ -4,20 +4,31 @@ $("#searchButton").click(function(e) {
     if ($("#searchField").val()) {
         $.get(apiURL+'/medications/'+$("#searchField").val(), function(apiData) {
             console.log("calling " + apiURL+'/medications/'+$("#searchField").val());
-                if (apiData.error) {
-                    console.log("medication not found")
-                } else {
-                    $("#srvMessage").html("Got data : " + apiData.name + " // " + apiData.description);
+            if (apiData.error) {
+                console.log("medication not found")
+            } else {
+                $("#srvMessage").html("Got data : " + apiData.name + " // " + apiData.description);
 
-                    //Made the firebase part here, IMO it's better to have it on the server. Tried to do it with a hook in "common/models/medication.js" but couldn't make it work
-                    firebase.database().ref('/medicationVisit/'+$("#searchField").val()).once('value').then(function(snapshot) {
-                        let newCount = snapshot.val().count;
-                        console.log(newCount++);
+                //Made the firebase part here, IMO it's better to have it on the server. Tried to do it with a hook in "common/models/medication.js" but couldn't make it work
+                firebase.database().ref('/medicationVisit/'+$("#searchField").val()).once('value').then(function(snapshot) {
+
+                    if (snapshot.val() && snapshot.val().count > 0) {
+                        var newCount = parseInt(snapshot.val().count) + 1;
+                        $("#srvMessage").html("Count (" + $("#searchField").val() + ") : " + newCount)
                         firebase.database().ref('/medicationVisit/'+$("#searchField").val()).set({
-                            count: newCount
+                            count: newCount,
+                            exists: true
                         });
-                    });
-                }
+                    } else {
+                        firebase.database().ref('/medicationVisit/'+$("#searchField").val()).set({
+                            count: 1,
+                            exists: false
+                        });
+                    }
+
+
+                });
+            }
             })
             .fail(function(e) {
                 var errorObj = JSON.parse(e.responseText)
