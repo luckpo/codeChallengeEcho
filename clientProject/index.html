@@ -1,0 +1,53 @@
+<html>
+<head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <script   src="http://code.jquery.com/jquery-2.2.4.min.js"   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+
+
+    <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyCrBk5qK5kWwOQ7yeW4FXMNMLsnQvmD8ZA",
+            authDomain: "echo-project-be883.firebaseapp.com",
+            databaseURL: "https://echo-project-be883.firebaseio.com",
+            storageBucket: "echo-project-be883.appspot.com",
+        };
+        firebase.initializeApp(config);
+    </script>
+
+
+
+</head>
+
+<body>
+<!--
+Make a form to :
+- find a medication by name
+- add a medication and control if medication exists
+-->
+
+
+<div class="row">
+    <div class="col-md-6">
+        Search form<br />
+        <input type="text" id="searchField" placeholder="Enter text" />
+        <input id="searchButton" class="btn btn-default" type="button" value="Input">
+    </div>
+    <div class="col-md-6">
+        Add a medication<br />
+        <input type="text" id="medName" placeholder="Name" />
+        <input type="text" id="medDesc" placeholder="Description" />
+        <input id="addButton" class="btn btn-default" type="button" value="Input">
+    </div>
+    <div class="col-md-12">
+        From the server :
+        <div id="srvMessage"></div>
+    </div>
+
+</div>
+<script src="main.js"></script>
+</body>
+</html>
